@@ -38,6 +38,9 @@ endfunction
 
 " Adapted from: https://vim.fandom.com/wiki/Easier_buffer_switching
 function! BufSelP(pattern)
+    if a:pattern ==# 'q'
+        return -1
+    endif
     let bufcount = bufnr("$")
     let currbufnr = 1
     let nummatches = 0
@@ -72,7 +75,10 @@ function! BufSelInt()
     if bnr != 0 || selection == '0'
         execute 'buffer ' . bnr
     else
-        call BufSelP(selection)
+        let r = BufSelP(selection)
+        if r ==# -1
+            return
+        endif
     endif
 endfunction
 
