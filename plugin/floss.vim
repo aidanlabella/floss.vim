@@ -18,7 +18,7 @@ function! FilteredBufferList()
                 echohl WildMenu
             endif
         elseif !bufinfo.listed
-            echohl Folded
+            continue
         else
             echohl Title
             if bufinfo.changed
@@ -70,7 +70,7 @@ endfunction
 
 function! BufSelInt()
     call FilteredBufferList()
-    let selection = input('buffer  ')
+    let selection = input('buffer $ ')
     let bnr = str2nr(selection)
     if bnr != 0 || selection == '0'
         execute 'buffer ' . bnr
